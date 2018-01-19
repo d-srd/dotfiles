@@ -21,7 +21,6 @@ set background=dark
 colorscheme gruvbox
 
 " make it shiny
-let mapleader="\<SPACE>"
 set showmatch
 set number
 set expandtab
@@ -39,6 +38,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_left_alt_sep= ''
 let g:airline_left_sep = ''
+let g:airline#extensions#tabline#enabled = 1
 
 " make it runny (?)
 nnoremap - :
@@ -46,3 +46,5 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" taken from: https://vi.stackexchange.com/a/2187
+nnoremap <C-E> :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
