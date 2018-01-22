@@ -1,4 +1,4 @@
-echo "[3m$(fortune -sa | cowsay)\n"    # display a random short quote at start
+echo "[3m$(fortune -soa | cowsay)\n"    # display a random offensive short quote at start
 
 # {{{ OPTIONS
 export COLUMNS      # remember columns for subprocesses
