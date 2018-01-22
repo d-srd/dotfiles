@@ -1,7 +1,4 @@
-echo "[3m$(fortune -sa)\n"    # display a random short quote at start
-
-# colors
-source /home/oda/.config/nvim/plugged/gruvbox/gruvbox_256palette.sh
+echo "[3m$(fortune -sa | cowsay)\n"    # display a random short quote at start
 
 # {{{ OPTIONS
 export COLUMNS      # remember columns for subprocesses
@@ -14,8 +11,9 @@ export LESS_TERMCAP_so=$'\e[0;34;36m'   # less start standout escape sequence
 export LESS_TERMCAP_ue=$'\e[0m'         # less stop underline escape sequence
 export LESS_TERMCAP_us=$'\e[0;35m'      # less start underline escape sequence
 
-export MAKEFLAGS="$MAKEFLAGS -j$(($(nproc)))"   # use all vcpus when compiling
-# }}}
+export CLICOLOR=1                       # colors in ls
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx  # no idea how this works, but it does
+
 
 # {{{ ALIASES
 
@@ -26,10 +24,6 @@ alias ll='ls -l'                # list files
 alias mkdir='mkdir -p'          # do not clobber files when making paths
 alias mv='mv -iv'               # interactive and verbose mv
 alias rm='rm -iv'               # interactive and verbose rm
-
-function ls {
-    command ls -F -h --color=always -v --author --time-style=long-iso -C "$@" | less -R -X -F
-}
 
 function extract() {
     if [ -f $1 ] ; then
@@ -62,16 +56,10 @@ alias testpowerline='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
 #   {{{ WEB SERVICES
 cheatsheet() { curl cheat.sh/$1; }                      # get command cheatsheet
 qrcode() { echo $@ | curl -F-=\<- qrenco.de; }          # print qrcode
-alias porn=' mpv "http://www.pornhub.com/random"'       # ayy lmao
-# pron(){ curl -s "$(curl -s "http://www.imagefap.com/random.php?f=5" | grep -o 'http://www.imagefap.com/photo/[0-9]\+/' | shuf -n 1 )" | grep 'mainPhoto' | grep -Po '(?<=src=")[^"]*' | xargs feh; }
+
 alias weather='curl -s wttr.in/~白井市 | head -7'       # print weather
 alias weatherforecast='curl -s wttr.in/~白井市 | head -37 | tail -30'
 #   }}}
-
-alias ap='sudo create_ap --config ~/.config/create_ap.conf' # spawn wifi spot
-alias bm='bmon -p wlp0s29u1u2,wlp0s29u1u1,wlp2s0,ap0 -o "curses:fgchar=S;bgchar=.;nchar=N;uchar=?;details"'
-alias kal='khal interactive'                            # show calendar
-alias ip='ip -c'                                        # colored ip
 
 alias gc='git commit -am'                               # git commit with message
 alias gl='git log --graph --oneline --decorate --all'   # graph git log
@@ -80,11 +68,7 @@ alias gs='git status -sb'                               # simplify git status
 alias grep='grep --color=auto'                          # colored grep
 
 alias less='less -i'                                    # case insensitive search
-alias mutt='neomutt'                                    # neomutt
-alias pactree='pactree --color'
-alias qutebrowser='qutebrowser --backend webengine'     # webengine in qutebrowser
 
-alias 死んでください='systemctl poweroff'   # great for shitposting
 alias tree='tree -C'
 alias vi='nvim'; alias vim='nvim'       # use nvim where vi or vim is called
 alias vimdiff='nvim -d'                 # use nvim when diffing
@@ -98,11 +82,10 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 # syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 # autocompletion
-autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # fuzzy completion
