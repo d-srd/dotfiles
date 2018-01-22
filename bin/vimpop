@@ -1,5 +1,0 @@
-#!/bin/sh
-# vim for dumb things that aren't vim
-nvim /tmp/vimpop
-</tmp/vimpop xsel -i --clipboard
-rm /tmp/vimpop
