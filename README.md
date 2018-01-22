@@ -2,7 +2,8 @@
 various settings for CLI applications
 
 ## Quickstart
-* `brew install neovim zsh zsh-syntax-highlighting`
+* `brew install neovim zsh zsh-syntax-highlighting cowsay fortune`
+* `gem install lolcat`
 * follow `zsh-syntax-highlighting` install instructions
 * `ln -s dotfiles/.zshrc .zshrc` && `ln -s dotfiles/.zshenv .zshenv`
 * in your `.config/nvim/init.vim` put `source dotfiles/.nvim`

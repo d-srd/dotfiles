@@ -1,4 +1,4 @@
-echo "[3m$(fortune -soa | cowsay)\n"    # display a random offensive short quote at start
+echo "$(fortune -soa | cowthink -s | lolcat)\n"    # display a random offensive short quote at start
 
 # {{{ OPTIONS
 export COLUMNS      # remember columns for subprocesses
@@ -57,9 +57,9 @@ alias testpowerline='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
 cheatsheet() { curl cheat.sh/$1; }                      # get command cheatsheet
 qrcode() { echo $@ | curl -F-=\<- qrenco.de; }          # print qrcode
 
-alias weather='curl -s wttr.in/~白井市 | head -7'       # print weather
-alias weatherforecast='curl -s wttr.in/~白井市 | head -37 | tail -30'
-#   }}}
+function wttr() {           # current weather 
+    curl -s wttr.in/$1
+}
 
 alias gc='git commit -am'                               # git commit with message
 alias gl='git log --graph --oneline --decorate --all'   # graph git log
