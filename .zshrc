@@ -57,8 +57,17 @@ alias testpowerline='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
 cheatsheet() { curl cheat.sh/$1; }                      # get command cheatsheet
 qrcode() { echo $@ | curl -F-=\<- qrenco.de; }          # print qrcode
 
+function libgdx() {
+    if [ -f ~/libgdx.jar ] ; then
+        java -jar ~/libgdx.jar
+    else
+        curl -S https://libgdx.badlogicgames.com/nightlies/dist/gdx-setup.jar > ~/libgdx.jar
+        java -jar ~/libgdx.jar
+    fi
+}
+
 function wttr() {           # current weather 
-    curl -s wttr.in/$1
+    curl -s wttr.in/$1 | awk 'n>=2 { print a[n%2] } { a[n%2]=$0; n=n+1 }'
 }
 
 alias gc='git commit -am'                               # git commit with message
@@ -270,4 +279,3 @@ build_prompt() {
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
 zstyle ':completion:*' menu select
-# }}}
