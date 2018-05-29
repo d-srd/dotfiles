@@ -1,4 +1,8 @@
 echo "$(fortune -soa | cowthink -s | lolcat)\n"    # display a random offensive short quote at start
+# remove zsh builtin 'r' which repeats the last command
+disable r
+
+export PATH="$HOME/.fastlane/bin:$PATH:$HOME/.cargo/bin:$HOME/opt/cross/bin:$HOME/.npm-packages/bin"
 
 # {{{ OPTIONS
 export COLUMNS      # remember columns for subprocesses
@@ -13,6 +17,9 @@ export LESS_TERMCAP_us=$'\e[0;35m'      # less start underline escape sequence
 
 export CLICOLOR=1                       # colors in ls
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx  # no idea how this works, but it does
+
+# fucking cocoapods
+export COCOAPODS_DISABLE_STATS=true
 
 
 # {{{ ALIASES
@@ -51,23 +58,19 @@ function extract() {
 alias path='echo -e ${PATH//:/\\n}'                 # show executable paths
 alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'   # show library paths
 alias testpowerline='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
+
 #   }}}
 
 #   {{{ WEB SERVICES
 cheatsheet() { curl cheat.sh/$1; }                      # get command cheatsheet
 qrcode() { echo $@ | curl -F-=\<- qrenco.de; }          # print qrcode
 
-function libgdx() {
-    if [ -f ~/libgdx.jar ] ; then
-        java -jar ~/libgdx.jar
-    else
-        curl -S https://libgdx.badlogicgames.com/nightlies/dist/gdx-setup.jar > ~/libgdx.jar
-        java -jar ~/libgdx.jar
-    fi
-}
-
 function wttr() {           # current weather 
     curl -s wttr.in/$1 | awk 'n>=2 { print a[n%2] } { a[n%2]=$0; n=n+1 }'
+}
+
+function activeSimulator() {
+    xcrun simctl list | egrep '(Booted)'
 }
 
 alias gc='git commit -am'                               # git commit with message
@@ -84,7 +87,7 @@ alias vimdiff='nvim -d'                 # use nvim when diffing
 # }}}
 
 # {{{ ZSH OPTIONS
-bindkey -v  # VIM mode
+# bindkey -v  # VIM mode
 
 # search command history with up and down keys
 bindkey "^[[A" history-beginning-search-backward
@@ -278,4 +281,6 @@ build_prompt() {
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
-zstyle ':completion:*' menu select
+## zstyle ':completion:*' menu select
+
+
