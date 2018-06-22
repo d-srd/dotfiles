@@ -2,7 +2,7 @@ echo "$(fortune -soa | cowthink -s | lolcat)\n"    # display a random offensive 
 # remove zsh builtin 'r' which repeats the last command
 disable r
 
-export PATH="$HOME/.fastlane/bin:$PATH:$HOME/.cargo/bin:$HOME/opt/cross/bin:$HOME/.npm-packages/bin"
+source $HOME/.bash_profile
 
 # {{{ OPTIONS
 export COLUMNS      # remember columns for subprocesses
