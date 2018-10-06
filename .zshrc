@@ -2,7 +2,10 @@ echo "$(fortune -soa | cowthink -s | lolcat)\n"    # display a random offensive 
 # remove zsh builtin 'r' which repeats the last command
 disable r
 
-source $HOME/.bash_profile
+source $HOME/dotfiles/.bash_profile
+
+# rbenv :D
+eval "$(rbenv init -)"
 
 # {{{ OPTIONS
 export COLUMNS      # remember columns for subprocesses
@@ -20,17 +23,17 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx  # no idea how this works, but it does
 
 # fucking cocoapods
 export COCOAPODS_DISABLE_STATS=true
+export HAXE_STD_PATH="/usr/local/lib/haxe/std"
 
 
 # {{{ ALIASES
 
 #   {{{ FILE MANAGEMENT
 alias cp='cp -iv'               # interactive and verbose cp
-alias l='ls -l -a'              # list all files
+alias l='/usr/local/bin/gls -la --color -h --group-directories-first'              
 alias ll='ls -l'                # list files
 alias mkdir='mkdir -p'          # do not clobber files when making paths
 alias mv='mv -iv'               # interactive and verbose mv
-alias rm='rm -iv'               # interactive and verbose rm
 
 function extract() {
     if [ -f $1 ] ; then
@@ -51,6 +54,17 @@ function extract() {
     else
         echo "'$1' is not a valid file!"
     fi
+}
+
+function add-ssh() {
+    curpath=$(pwd)
+	cd ~/.ssh
+	ssh-add
+    cd $curpath
+}
+
+function menza() {
+    python3 ~/Developer/scripts/menza.py | awk '/JELOVNIK/,EOF' | ghead -n -1 | elinks --dump
 }
 #   }}}
 
@@ -73,8 +87,25 @@ function activeSimulator() {
     xcrun simctl list | egrep '(Booted)'
 }
 
+function swiftRename() {
+    find . -type f -name "*.swift" -exec gsed -i "s/$1/$2/g" {} \;
+}
+
 function localIP() {
     ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' 
+}
+
+# hashtag funny
+function pasta() {
+    say -v Fred "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo."
+}
+
+function wtf() {
+    if [ -z "$1" ]; then
+        say -v Good\ News "What the fuck!!"
+    else
+        say -v Good\ News "What the fuck $(echo $1)"
+    fi
 }
 
 alias gc='git commit -am'                               # git commit with message

@@ -22,8 +22,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'junegunn/fzf'                               " multy entry selection UI
 
-  Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
   Plug 'jpalardy/vim-slime'                         " send text to repl in screen/tmux/:terminal/etc.
 
   Plug 'davidhalter/jedi-vim'                       " python autocomplete
