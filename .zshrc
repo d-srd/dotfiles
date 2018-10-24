@@ -75,8 +75,11 @@ function menza() {
 
 #   {{{ SHELL MANAGEMENT
 alias path='echo -e ${PATH//:/\\n}'                 # show executable paths
-alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'   # show library paths
-alias testpowerline='echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699"'
+alias grep='grep --color=auto'                          # colored grep
+alias less='less -i'                                    # case insensitive search
+alias tree='tree -C'
+alias vi='nvim'; alias vim='nvim'       # use nvim where vi or vim is called
+alias vimdiff='nvim -d'                 # use nvim when diffing
 
 #   }}}
 
@@ -100,11 +103,6 @@ function localIP() {
     ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}' 
 }
 
-# hashtag funny
-function pasta() {
-    say -v Fred "What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little "clever" comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, kiddo."
-}
-
 function wtf() {
     if [ -z "$1" ]; then
         say -v Good\ News "What the fuck!!"
@@ -112,19 +110,6 @@ function wtf() {
         say -v Good\ News "What the fuck $(echo $1)"
     fi
 }
-
-alias gc='git commit -am'                               # git commit with message
-alias gl='git log --graph --oneline --decorate --all'   # graph git log
-alias gs='git status -sb'                               # simplify git status
-
-alias grep='grep --color=auto'                          # colored grep
-
-alias less='less -i'                                    # case insensitive search
-
-alias tree='tree -C'
-alias vi='nvim'; alias vim='nvim'       # use nvim where vi or vim is called
-alias vimdiff='nvim -d'                 # use nvim when diffing
-# }}}
 
 # {{{ ZSH OPTIONS
 # bindkey -v  # VIM mode
@@ -159,6 +144,17 @@ setopt HIST_IGNORE_DUPS         # only keep most recent usage of a command
 # {{{ PROMPT
 autoload -Uz promptinit && promptinit
 prompt pure
+PROMPT='%(1j.[%j] .)%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+
+# if [ ! -d "~/powerlevel9k" ] ; then
+#     echo "powerlevel9k ain't here bro. imma clone it"
+#     git clone 'https://github.com/bhilburn/powerlevel9k/' '~/powerlevel9k'
+# fi
+# 
+# POWERLEVEEL9K_MODE='nerdfont-complete'
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(background_jobs context dir vcs)
+# source '~/powerlevel9k/powerlevel9k.zsh-theme'
 
 # The following lines were added by compinstall
 
