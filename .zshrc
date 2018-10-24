@@ -144,7 +144,7 @@ setopt HIST_IGNORE_DUPS         # only keep most recent usage of a command
 # {{{ PROMPT
 autoload -Uz promptinit && promptinit
 prompt pure
-PROMPT='%(1j.[%j] .)%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+PROMPT='%(1j.[%j] .)%(?.%F{white}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
 
 # if [ ! -d "~/powerlevel9k" ] ; then
 #     echo "powerlevel9k ain't here bro. imma clone it"
