@@ -25,6 +25,9 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'jpalardy/vim-slime'                         " send text to repl in screen/tmux/:terminal/etc.
 
   Plug 'davidhalter/jedi-vim'                       " python autocomplete
+
+  " Solarized color scheme
+  Plug 'iCyMind/NeoSolarized'
 call plug#end()
 
 " make it pretty
@@ -86,3 +89,7 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+" highlight fastlane files as ruby
+au BufNewFile,BufRead Fastfile setf ruby
+au BufNewFile,BufRead Podfile setf ruby

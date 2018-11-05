@@ -68,6 +68,10 @@ function add-ssh() {
     cd $curpath
 }
 
+function toggleDarkMode() {
+    osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+}
+
 function menza() {
     python3 ~/Developer/scripts/menza.py | awk '/JELOVNIK/,EOF' | ghead -n -1 | elinks --dump
 }
@@ -144,7 +148,7 @@ setopt HIST_IGNORE_DUPS         # only keep most recent usage of a command
 # {{{ PROMPT
 autoload -Uz promptinit && promptinit
 prompt pure
-PROMPT='%(1j.[%j] .)%(?.%F{white}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f '
+PROMPT='%(1j.[%j] .)%(?.%F{blue}.%F{red})${PURE_PROMPT_SYMBOL:-▶}%f '
 
 # if [ ! -d "~/powerlevel9k" ] ; then
 #     echo "powerlevel9k ain't here bro. imma clone it"
